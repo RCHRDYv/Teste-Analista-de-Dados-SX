@@ -1,0 +1,3 @@
+# Fim de linha LF em todos os arquivos de texto, para os scripts rodarem nos containers Linux
+* text=auto eol=lf
+*.png binary
