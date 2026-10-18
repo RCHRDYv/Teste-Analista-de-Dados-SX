@@ -155,7 +155,7 @@ A barra é a média dos participantes que fizeram a prova naquele estado, e a ma
 
 ![Média por dependência da escola e por faixa etária](docs/img/04_media_dependencia_faixa.png)
 
-À esquerda, as escolas privadas e as federais ficam quase empatadas, bem à frente das municipais e estaduais. "Não informada" reúne quem não declarou escola. À direita, a média cai com a idade, de 521,9 aos 17 anos para 457,8 entre 66 e 70 anos.
+Em cima, as escolas privadas e as federais ficam quase empatadas, bem à frente das municipais e estaduais. "Não informada" reúne quem não declarou escola. Embaixo, a média cai com a idade, de 521,9 aos 17 anos para 457,8 entre 66 e 70 anos.
 
 ![Média por cor/raça e por sexo](docs/img/14_media_cor_raca_sexo.png)
 
