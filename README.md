@@ -133,7 +133,7 @@ O [`qa_carga.py`](src/qa/qa_carga.py) roda 40 verificações por um caminho inde
 
 ## Visões
 
-Médias e medianas por grupo usam todos os 2.588.681 participantes presentes nas quatro provas. O boxplot e os gráficos de correlação usam uma amostra fixa de 10% (cerca de 259 mil pessoas), que se repete igual a cada execução. Nos gráficos de barras, a barra é a média e a marca preta é a mediana. Nos gráficos de linha, a linha cheia é a média e a linha fina com marcador vazado é a mediana. O código está no [notebook](notebooks/analise_enem_2020.ipynb).
+Médias e medianas por grupo usam todos os 2.588.681 participantes presentes nas quatro provas. O boxplot e os gráficos de correlação usam uma amostra fixa de 10% (cerca de 259 mil pessoas), que se repete igual a cada execução. A mesma regra de cores vale para todos os gráficos: a média é azul e a mediana é vermelha. Nas barras, a barra é a média e a marca vermelha sobre ela é a mediana, com os dois valores na coluna à direita. Nas linhas, a linha azul com bolinhas é a média e a linha vermelha com quadrados é a mediana. A linha cinza escura, quando aparece, é a referência de comparação. O título de cada gráfico já diz a conclusão. O código está no [notebook](notebooks/analise_enem_2020.ipynb).
 
 ### 1. A nota como indicador de desempenho
 
@@ -143,15 +143,15 @@ Mostra o que aconteceu com cada um dos 5.783.109 inscritos. 52,2% faltaram aos d
 
 ![Distribuição da média das quatro provas objetivas](docs/img/01_distribuicao_media.png)
 
-Cada barra conta quantos participantes tiveram a média naquela faixa de 10 pontos. A maioria fica entre 400 e 600. A mediana (linha laranja, 503,9) divide os participantes em duas metades iguais. Ela fica abaixo da média (linha preta, 512,9) porque um grupo menor, com notas muito altas, puxa a média para cima.
+Cada barra conta quantos participantes tiveram a média naquela faixa de 10 pontos. A maioria fica entre 400 e 600. A mediana (linha vermelha, 503,9) divide os participantes em duas metades iguais. Ela fica abaixo da média (linha preta, 512,9) porque um grupo menor, com notas muito altas, puxa a média para cima.
 
 ![Notas por prova](docs/img/02_notas_por_prova.png)
 
-Cada caixa mostra onde estão os 50% centrais das notas de uma prova, e a linha dentro dela é a mediana. Quanto mais alta a caixa, mais espalhadas são as notas: Matemática é a que mais varia. A redação tem a mediana mais alta (580,0).
+Cada caixa mostra onde estão os 50% centrais das notas de uma prova, e a linha preta dentro dela é a mediana, com o valor escrito embaixo do nome da prova. Quanto mais alta a caixa, mais espalhadas são as notas: Matemática é a que mais varia. A redação tem a mediana mais alta (580,0).
 
 ![Média por UF de aplicação](docs/img/03_media_por_uf.png)
 
-A barra é a média dos participantes que fizeram a prova naquele estado, e a marca preta é a mediana. A linha vertical é a média do Brasil (512,9). Só os sete estados do Sul e do Sudeste e o DF ficam acima dela. Em todos os estados a mediana fica abaixo da média.
+A barra é a média dos participantes que fizeram a prova naquele estado, e a marca vermelha é a mediana. A linha cinza vertical é a média do Brasil (512,9). Só os sete estados do Sul e do Sudeste e o DF ficam acima dela. Em todos os estados a mediana fica abaixo da média.
 
 ![Média por dependência da escola e por faixa etária](docs/img/04_media_dependencia_faixa.png)
 
@@ -175,7 +175,7 @@ Mostra quanto das diferenças de nota entre os participantes cada variável expl
 
 ![Redações zeradas por motivo e média nas objetivas](docs/img/07_redacao_status.png)
 
-À esquerda, quantas redações foram zeradas por cada motivo: deixar em branco e fugir do tema são os mais comuns. À direita, a média (barra) e a mediana (marca) nas provas objetivas de quem zerou por cada motivo. Todos ficam abaixo da média de quem não zerou (514,5, linha vertical).
+Em cima, quantas redações foram zeradas por cada motivo: deixar em branco e fugir do tema são os mais comuns. Embaixo, a média (barra) e a mediana (marca vermelha) nas provas objetivas de quem zerou por cada motivo. Todos ficam abaixo da média de quem não zerou (514,5, linha cinza).
 
 ![Notas das objetivas por faixa de nota da redação](docs/img/08_objetivas_por_faixa_redacao.png)
 
@@ -193,15 +193,15 @@ Cada linha é uma prova. O eixo horizontal vai da família sem renda até a fam�
 
 ![Média e participantes por renda familiar](docs/img/15_media_por_renda.png)
 
-Em cima, a média (linha cheia) e a mediana (linha fina) em cada faixa de renda. Embaixo, quantos participantes estão em cada faixa. A média sobe de 462,6 para 619,0 entre as pontas, mas a maior parte dos participantes está embaixo: 52,8% dos que informaram a renda têm até R$ 1.567,50 por mês.
+Em cima, a média (azul) e a mediana (vermelha) em cada faixa de renda. Embaixo, quantos participantes estão em cada faixa. A média sobe de 462,6 para 619,0 entre as pontas, mas a maior parte dos participantes está embaixo: 52,8% dos que informaram a renda têm até R$ 1.567,50 por mês.
 
 ![Média por escolaridade da mãe e por internet e computador](docs/img/11_media_mae_internet.png)
 
-À esquerda, a média sobe a cada nível de escolaridade da mãe, de 460,9 (nunca estudou) a 565,5 (pós-graduação). À direita, quem tem internet e computador em casa tem a maior média (541,9), e quem não tem nenhum dos dois, a menor (464,2). Ter computador sem internet aparece com média maior que ter internet sem computador.
+Em cima, a média sobe a cada nível de escolaridade da mãe, de 460,9 (nunca estudou) a 565,5 (pós-graduação). Embaixo, quem tem internet e computador em casa tem a maior média (541,9), e quem não tem nenhum dos dois, a menor (464,2). Ter computador sem internet aparece com média maior que ter internet sem computador.
 
 ![Média por renda e tipo de escola](docs/img/12_renda_x_tipo_escola.png)
 
-Compara, dentro de cada faixa de renda, quem estudou em escola pública (azul) e em escola privada (laranja). A escola privada fica acima em todas as faixas, mas a distância diminui conforme a renda aumenta: 78,7 pontos na faixa sem renda e 36,6 na mais alta.
+Em cima, quem estudou em escola privada; embaixo, quem estudou em escola pública, com o mesmo eixo nos dois painéis para comparar a altura das linhas. A escola privada fica acima em todas as faixas, mas a distância diminui conforme a renda aumenta: 78,7 pontos na faixa sem renda e 36,6 na mais alta.
 
 ## Conclusões e insights
 
