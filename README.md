@@ -133,54 +133,119 @@ O [`qa_carga.py`](src/qa/qa_carga.py) roda 40 verificações por um caminho inde
 
 ## Visões
 
-Os gráficos agregados usam todos os participantes presentes nas quatro provas. Distribuições e correlações usam uma amostra determinística de 10% (cerca de 259 mil pessoas). O código está no [notebook](notebooks/analise_enem_2020.ipynb).
+Médias e medianas por grupo usam todos os 2.588.681 participantes presentes nas quatro provas. O boxplot e os gráficos de correlação usam uma amostra fixa de 10% (cerca de 259 mil pessoas), que se repete igual a cada execução. Nos gráficos de barras, a barra é a média e a marca preta é a mediana. Nos gráficos de linha, a linha cheia é a média e a linha fina com marcador vazado é a mediana. O código está no [notebook](notebooks/analise_enem_2020.ipynb).
 
 ### 1. A nota como indicador de desempenho
 
+![Situação dos inscritos nos dois dias de prova](docs/img/13_situacao_inscritos.png)
+
+Mostra o que aconteceu com cada um dos 5.783.109 inscritos. 52,2% faltaram aos dois dias e 44,8% fizeram as quatro provas. Quase ninguém faltou a um dia só: quem faltou, em geral, faltou aos dois.
+
 ![Distribuição da média das quatro provas objetivas](docs/img/01_distribuicao_media.png)
+
+Cada barra conta quantos participantes tiveram a média naquela faixa de 10 pontos. A maioria fica entre 400 e 600. A mediana (linha laranja, 503,9) divide os participantes em duas metades iguais. Ela fica abaixo da média (linha preta, 512,9) porque um grupo menor, com notas muito altas, puxa a média para cima.
 
 ![Notas por prova](docs/img/02_notas_por_prova.png)
 
+Cada caixa mostra onde estão os 50% centrais das notas de uma prova, e a linha dentro dela é a mediana. Quanto mais alta a caixa, mais espalhadas são as notas: Matemática é a que mais varia. A redação tem a mediana mais alta (580,0).
+
 ![Média por UF de aplicação](docs/img/03_media_por_uf.png)
 
+A barra é a média dos participantes que fizeram a prova naquele estado, e a marca preta é a mediana. A linha vertical é a média do Brasil (512,9). Só os sete estados do Sul e do Sudeste e o DF ficam acima dela. Em todos os estados a mediana fica abaixo da média.
+
 ![Média por dependência da escola e por faixa etária](docs/img/04_media_dependencia_faixa.png)
+
+À esquerda, as escolas privadas e as federais ficam quase empatadas, bem à frente das municipais e estaduais. "Não informada" reúne quem não declarou escola. À direita, a média cai com a idade, de 521,9 aos 17 anos para 457,8 entre 66 e 70 anos.
+
+![Média por cor/raça e por sexo](docs/img/14_media_cor_raca_sexo.png)
+
+Participantes brancos têm a maior média (539,9) e indígenas a menor (467,2). Homens têm média 26 pontos acima da das mulheres. A diferença aparece também na mediana (524,5 contra 491,5), então não é efeito de poucos casos extremos.
 
 ### 2. Correlações com a nota
 
 ![Correlação de Spearman entre variáveis ordinais e as notas](docs/img/05_correlacao_spearman.png)
 
+Cada quadrado mostra o quanto uma variável do questionário sobe e desce junto com a nota de uma prova. A escala vai de -1 a 1, e 0 significa nenhuma relação. Azul indica que a nota sobe junto com a variável, e vermelho, que ela cai. Renda e número de computadores em casa têm as relações mais fortes. Tamanho da família e idade quase não se relacionam com a nota.
+
 ![Variância da média explicada por cada variável](docs/img/06_eta_quadrado.png)
+
+Mostra quanto das diferenças de nota entre os participantes cada variável explica sozinha. A renda familiar explica 25,3%, mais de três vezes a segunda colocada (cor/raça, 7,7%). Ser treineiro praticamente não muda a média.
 
 ### 3. Dados da redação
 
 ![Redações zeradas por motivo e média nas objetivas](docs/img/07_redacao_status.png)
 
+À esquerda, quantas redações foram zeradas por cada motivo: deixar em branco e fugir do tema são os mais comuns. À direita, a média (barra) e a mediana (marca) nas provas objetivas de quem zerou por cada motivo. Todos ficam abaixo da média de quem não zerou (514,5, linha vertical).
+
 ![Notas das objetivas por faixa de nota da redação](docs/img/08_objetivas_por_faixa_redacao.png)
 
+Cada linha é uma prova objetiva. Da esquerda para a direita, a nota da redação aumenta, e as notas das quatro provas sobem junto. Matemática é a que mais sobe entre quem tirou as maiores notas na redação.
+
 ![Competências da redação x provas objetivas](docs/img/09_competencias_x_provas.png)
+
+Mostra o quanto cada competência da redação sobe e desce junto com cada prova objetiva. Todas as relações são positivas e moderadas, de 0,37 a 0,52. A mais forte é entre a competência 1 (domínio da escrita formal) e a prova de Linguagens.
 
 ### 4. Questionário socioeconômico
 
 ![Notas por renda familiar](docs/img/10_notas_por_renda.png)
 
+Cada linha é uma prova. O eixo horizontal vai da família sem renda até a família com renda acima de 20 vezes R$ 1.045,00. As quatro notas sobem com a renda, e Matemática é a que mais sobe: 224 pontos entre as pontas.
+
+![Média e participantes por renda familiar](docs/img/15_media_por_renda.png)
+
+Em cima, a média (linha cheia) e a mediana (linha fina) em cada faixa de renda. Embaixo, quantos participantes estão em cada faixa. A média sobe de 462,6 para 619,0 entre as pontas, mas a maior parte dos participantes está embaixo: 52,8% dos que informaram a renda têm até R$ 1.567,50 por mês.
+
 ![Média por escolaridade da mãe e por internet e computador](docs/img/11_media_mae_internet.png)
+
+À esquerda, a média sobe a cada nível de escolaridade da mãe, de 460,9 (nunca estudou) a 565,5 (pós-graduação). À direita, quem tem internet e computador em casa tem a maior média (541,9), e quem não tem nenhum dos dois, a menor (464,2). Ter computador sem internet aparece com média maior que ter internet sem computador.
 
 ![Média por renda e tipo de escola](docs/img/12_renda_x_tipo_escola.png)
 
+Compara, dentro de cada faixa de renda, quem estudou em escola pública (azul) e em escola privada (laranja). A escola privada fica acima em todas as faixas, mas a distância diminui conforme a renda aumenta: 78,7 pontos na faixa sem renda e 36,6 na mais alta.
+
 ## Conclusões e insights
 
-As relações abaixo são associações observadas nos dados. Nenhuma delas, sozinha, demonstra causa.
+**Como ler esta seção.** Cada conclusão descreve algo que acontece junto nos dados, como "quem tem mais renda costuma ter nota maior". Isso não prova que uma coisa causa a outra. Renda, escola, região e escolaridade dos pais costumam andar juntas, e os dados não permitem separar o peso de cada uma. As notas do ENEM vão de 0 a 1.000.
 
-1. **Mais da metade dos inscritos faltou.** 55,21% não compareceram a pelo menos um dos dois dias, e só 2.588.681 pessoas (44,8% dos inscritos) fizeram as quatro provas objetivas. Como contexto, o Leia-me do Inep registra que, por causa da pandemia, as provas foram adiadas para janeiro de 2021.
-2. **A renda familiar é a variável mais associada à nota.** Ela tem correlação de Spearman de 0,48 com a média e explica 25,3% da variância (eta²), mais de três vezes o valor da segunda colocada, cor/raça (7,7%).
-3. **A distância entre as faixas de renda é grande.** A média vai de 462,6 entre quem declara não ter renda a 619,0 acima de R$ 20.900. Ao mesmo tempo, 52,2% dos presentes declaram renda familiar de até R$ 1.567,50.
-4. **Matemática é a prova mais sensível ao contexto socioeconômico.** Entre as faixas de renda extremas, a nota de Matemática sobe 224 pontos (de 454,4 para 678,4). É também a objetiva com a maior dispersão: desvio-padrão de 117,2, contra 73,0 a 95,0 nas outras três.
-5. **A rede federal se aproxima da privada.** Pela dependência administrativa da escola (dado disponível para 15,6% dos inscritos), a média é 576,5 na privada, 569,3 na federal, 512,4 na municipal e 491,7 na estadual. Nove dos dez grupos de escola com maior média são federais.
-6. **A vantagem da escola privada diminui com a renda.** Pelo tipo de escola que o próprio participante declara (`TP_ESCOLA`), entre quem não tem renda a média de quem estudou em escola privada fica 78,7 pontos acima da de quem estudou em escola pública. Acima de R$ 20.900, a diferença cai para 36,6 pontos.
-7. **O ambiente em casa acompanha a nota.** A média vai de 460,9 entre filhos de mães que nunca estudaram a 565,5 quando a mãe tem pós-graduação. Quem tem internet e computador em casa tem média 541,9, contra 464,2 de quem não tem nenhum dos dois.
-8. **Há desigualdade por cor/raça e por sexo.** A média de participantes brancos (539,92) fica 72,8 pontos acima da de indígenas (467,16) e 49,3 acima da de pretos (490,58). As mulheres são 60,4% de quem fez as quatro provas, mas têm média 26 pontos menor que a dos homens (502,61 contra 528,58).
-9. **O desempenho tem recorte regional.** Só as sete UFs do Sul e do Sudeste e o Distrito Federal ficam acima da média nacional de 512,9. Entre a maior média (SP, 541,2) e a menor (AP, 476,8) há 64,4 pontos.
-10. **Redação e provas objetivas andam juntas.** 97,1% das redações corrigidas não tiveram problema. Quem zerou a redação também tem média menor nas objetivas (de 422,1 a 470,9, contra 514,5 de quem não zerou), e as cinco competências têm correlação de 0,37 a 0,52 com as quatro provas.
+**1. Mais da metade dos inscritos faltou a pelo menos um dia de prova.**  
+De cada 100 inscritos, 55 não compareceram a pelo menos um dos dois dias. Só 2.588.681 pessoas, menos da metade dos 5,8 milhões de inscritos, fizeram as quatro provas objetivas. Como contexto, o Inep registra que a edição de 2020 foi adiada para janeiro de 2021 por causa da pandemia.  
+*Gráfico: [Situação dos inscritos nos dois dias de prova](docs/img/13_situacao_inscritos.png).*
+
+**2. Quanto maior a renda da família, maior a nota, e nenhum outro fator pesa tanto.**  
+Entre todas as variáveis analisadas, a renda familiar é a que mais anda junto com o desempenho. Sozinha, ela responde por cerca de um quarto das diferenças de nota entre os participantes (25,3%, pela medida chamada eta²). É mais de três vezes o peso do segundo fator, cor/raça (7,7%).  
+*Gráficos: [Quanto cada variável explica da variação da média](docs/img/06_eta_quadrado.png) e [Correlação de Spearman entre variáveis ordinais e as notas](docs/img/05_correlacao_spearman.png).*
+
+**3. Quem tem a maior renda faz, em média, 156 pontos a mais que quem não tem renda.**  
+Quem declara não ter renda familiar tem média de 462,6. Quem declara renda acima de R$ 20.900 por mês tem média de 619,0. E a maior parte dos participantes está na ponta de baixo: 52,8% dos que informaram a renda vivem em famílias com até R$ 1.567,50 por mês.  
+*Gráficos: [Média e participantes por renda familiar](docs/img/15_media_por_renda.png) e [Notas por renda familiar](docs/img/10_notas_por_renda.png).*
+
+**4. Em Matemática, a nota sobe 224 pontos da família sem renda até a de renda mais alta.**  
+É a maior diferença entre as quatro provas: a nota vai de 454,4 para 678,4. Matemática também é a prova com as notas mais espalhadas, ou seja, há mais gente muito acima e muito abaixo da média do que nas outras (desvio-padrão de 117,2, contra 73,0 a 95,0 nas demais).  
+*Gráficos: [Notas por renda familiar](docs/img/10_notas_por_renda.png) e [Notas por prova](docs/img/02_notas_por_prova.png).*
+
+**5. Alunos de escolas federais têm média quase igual à dos de escolas privadas, e bem acima dos de escolas estaduais e municipais.**  
+A média é 576,5 na rede privada, 569,3 na federal, 512,4 na municipal e 491,7 na estadual. Dos dez grupos de escolas com as maiores médias do país, nove são federais. Esse dado só existe para 15,6% dos inscritos, que são os que informaram a escola.  
+*Gráfico: [Média por dependência da escola e por faixa etária](docs/img/04_media_dependencia_faixa.png). Os dez grupos estão na [tabela de indicadores](docs/indicadores.md), pergunta 1.*
+
+**6. Entre os mais pobres, quem estudou em escola privada tem 79 pontos a mais que quem estudou em pública. Entre os mais ricos, a diferença cai para 37.**  
+Aqui o tipo de escola é o que o próprio participante informou na inscrição. Na faixa sem renda, a diferença entre privada e pública é de 78,7 pontos. Na faixa acima de R$ 20.900, é de 36,6 pontos. Ou seja, o tipo de escola acompanha uma diferença maior justamente onde a renda é menor.  
+*Gráfico: [Média por renda e tipo de escola](docs/img/12_renda_x_tipo_escola.png).*
+
+**7. Quanto mais a mãe estudou, maior a nota, e quem tem internet e computador em casa faz 78 pontos a mais.**  
+Filhos de mães que nunca estudaram têm média de 460,9. Quando a mãe tem pós-graduação, a média sobe para 565,5, mais de 100 pontos acima. Quem tem internet e computador em casa tem média de 541,9, contra 464,2 de quem não tem nenhum dos dois.  
+*Gráfico: [Média por escolaridade da mãe e por internet e computador](docs/img/11_media_mae_internet.png).*
+
+**8. Candidatos brancos e homens têm média maior que os demais grupos.**  
+Participantes brancos têm a maior média entre os grupos de cor/raça: 539,92. Ela fica 49,3 pontos acima da média de pretos (490,58) e 72,8 acima da de indígenas (467,16). Os homens têm média de 528,58, 26 pontos acima da das mulheres (502,61), mesmo as mulheres sendo a maioria de quem fez as quatro provas (60,4%).  
+*Gráfico: [Média por cor/raça e por sexo](docs/img/14_media_cor_raca_sexo.png).*
+
+**9. Só os estados do Sul, do Sudeste e o Distrito Federal ficam acima da média nacional.**  
+A média nacional é de 512,9. Os sete estados do Sul e do Sudeste e o DF ficam acima dela, e todos os demais ficam abaixo. Entre o estado com a maior média (São Paulo, 541,2) e o com a menor (Amapá, 476,8) há 64,4 pontos de diferença.  
+*Gráfico: [Média por UF de aplicação](docs/img/03_media_por_uf.png).*
+
+**10. Quem foi bem na redação também foi bem nas provas objetivas, e quem zerou a redação foi pior nelas.**  
+A grande maioria das redações (97,1%) foi corrigida sem problemas. Quem teve a redação zerada, por deixar em branco ou fugir do tema, por exemplo, tem média de 422,1 a 470,9 nas provas objetivas, contra 514,5 de quem não zerou. Na outra ponta, a nota das objetivas sobe a cada faixa de nota da redação, nas quatro provas.  
+*Gráficos: [Redações zeradas por motivo e média nas objetivas](docs/img/07_redacao_status.png), [Notas das objetivas por faixa de nota da redação](docs/img/08_objetivas_por_faixa_redacao.png) e [Competências da redação x provas objetivas](docs/img/09_competencias_x_provas.png).*
 
 ## Decisões e organização
 
