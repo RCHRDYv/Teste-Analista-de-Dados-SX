@@ -147,7 +147,7 @@ Cada barra conta quantos participantes tiveram a média naquela faixa de 10 pont
 
 ![Notas por prova](docs/img/02_notas_por_prova.png)
 
-Cada caixa mostra onde estão os 50% centrais das notas de uma prova, e a linha preta dentro dela é a mediana. Os números ao lado de cada caixa e nas pontas das hastes dão os valores de cada posição. Quanto mais alta a caixa, mais espalhadas são as notas: Matemática é a que mais varia. A redação tem a mediana mais alta (580,0).
+Cada caixa mostra onde estão os 50% centrais das notas de uma prova, e a linha preta dentro dela é a mediana. Quanto mais alta a caixa, mais espalhadas são as notas: Matemática é a que mais varia. A redação tem a mediana mais alta (580,0).
 
 ![Média por UF de aplicação](docs/img/03_media_por_uf.png)
 
