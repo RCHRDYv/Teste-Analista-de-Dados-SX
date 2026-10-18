@@ -1,11 +1,11 @@
 # ADR-0005: Agrupamento de escola sem CO_ESCOLA
 
 - Data: 18/10/2026
-- Status: Proposto (confirmar no Leia-me e no dicionário do Inep)
+- Status: Aceito
 
 ## Contexto
 
-A primeira pergunta do teste é qual escola tem a maior média de notas. A partir do ENEM 2020, o Inep passou a publicar os microdados num modelo simplificado e retirou a variável `CO_ESCOLA`, que identificava a escola onde o participante declarou concluir o ensino médio. Sem ela, não há como identificar uma escola individual no arquivo público.
+A primeira pergunta do teste é qual escola tem a maior média de notas. O Leia-me dos Microdados do Enem 2020 (Inep, fevereiro de 2022, seção 3, página 7) informa que, com a adoção do modelo simplificado de microdados por causa da LGPD, a variável `CO_ESCOLA` foi excluída da tabela `MICRODADOS_ENEM_2020`. Sem ela, não há como identificar uma escola individual no arquivo público. O dicionário da mesma edição confirma que o bloco "Dados da escola" traz apenas município, UF, dependência administrativa, localização e situação de funcionamento.
 
 ## Decisão
 
@@ -13,5 +13,5 @@ Respondo a pergunta no nível mais fino disponível no arquivo: o grupo formado 
 
 ## Consequências
 
-- A resposta deixa claro que não se trata de uma escola individual e explica o motivo.
-- A maior parte dos inscritos não informa escola, porque esses campos costumam vir preenchidos só para quem concluía o ensino médio no ano. O número de participantes com escola informada aparece junto da resposta.
+- A resposta deixa claro que não se trata de uma escola individual e explica o motivo, citando o Leia-me.
+- Só 904.569 dos 5.783.109 inscritos (15,6%) têm escola informada (`CO_MUNICIPIO_ESC` preenchido). Esse número aparece junto da resposta.
