@@ -2,6 +2,14 @@
 
 Entrega do teste técnico de Analista de Dados ([enunciado](docs/enunciado.md)). O pipeline baixa os microdados do ENEM 2020 publicados pelo Inep, modela a base em esquema estrela, carrega no MySQL com um ETL em Python, responde os oito indicadores em SQL, confere tudo com um recálculo independente em PySpark e gera as visões num notebook. Tudo roda em Docker.
 
+**Resumo executivo**
+
+- **Base:** 5.783.109 inscritos no ENEM 2020, dos quais 2.588.681 (44,8%) fizeram as quatro provas objetivas. As análises de nota usam esse grupo.
+- **Pipeline:** esquema estrela no MySQL, carregado por um ETL em Python dentro do Docker e conferido por 40 verificações, incluindo um recálculo independente em PySpark.
+- **Principal achado:** a renda familiar é o fator que mais acompanha a nota. Sozinha, ela explica 25,3% da variação, e a média vai de 462,6 (sem renda) a 619,0 (acima de R$ 20.900).
+- **Desigualdades que resistem ao controle:** comparando pessoas com a mesma renda, escola, sexo e UF, a diferença entre brancos e pretos cai de 49,3 para 21,7 pontos, e a vantagem da escola privada cai de 81,1 para 28,6. A diferença entre homens e mulheres quase se mantém: de 26,0 para 19,5.
+- **Limite principal:** desde a edição 2020, o arquivo público não identifica escolas, então a pergunta 1 é respondida por grupo de escolas.
+
 | Pergunta | Resposta |
 |---|---|
 | 1. Escola com maior média | Não há escola individual no arquivo público: o Inep retirou o `CO_ESCOLA` a partir dos microdados da edição 2020. No nível mais fino disponível, o grupo com maior média é **escolas federais urbanas de Viçosa (MG)**, com **688,60** e 153 participantes |
@@ -171,6 +179,10 @@ Cada quadrado mostra o quanto uma variável do questionário sobe e desce junto 
 
 Mostra quanto das diferenças de nota entre os participantes cada variável explica sozinha. A renda familiar explica 25,3%, mais de três vezes a segunda colocada (cor/raça, 7,7%). Ser treineiro praticamente não muda a média.
 
+![Diferenças de média com e sem controles](docs/img/16_efeitos_controlados.png)
+
+Mostra quanto de cada diferença de média sobra quando se comparam pessoas com a mesma faixa de renda, o mesmo tipo de escola declarado, a mesma cor/raça, o mesmo sexo e a mesma UF. A barra cinza é a diferença bruta, e a azul é a que sobra com esses controles, calculada por regressão linear. A vantagem da escola privada cai de 81,1 para 28,6 pontos, e a diferença entre brancos e pretos, de 49,3 para 21,7. A diferença entre homens e mulheres muda pouco: de 26,0 para 19,5. Com 2,5 milhões de pessoas, qualquer diferença tem p-valor praticamente zero, por isso o gráfico mostra o tamanho do efeito e o intervalo de 95%.
+
 ### 3. Dados da redação
 
 ![Redações zeradas por motivo e média nas objetivas](docs/img/07_redacao_status.png)
@@ -203,9 +215,18 @@ Em cima, a média sobe a cada nível de escolaridade da mãe, de 460,9 (nunca es
 
 Em cima, quem estudou em escola privada; embaixo, quem estudou em escola pública, com o mesmo eixo nos dois painéis para comparar a altura das linhas. A escola privada fica acima em todas as faixas, mas a distância diminui conforme a renda aumenta: 78,7 pontos na faixa sem renda e 36,6 na mais alta.
 
+## Limitações
+
+- **Autodeclaração.** Sexo, cor/raça, renda, escolaridade dos pais e tipo de escola são respostas do próprio participante.
+- **Muita resposta em branco sobre a escola.** 68,6% dos presentes não informaram o tipo de escola, e só 15,6% dos inscritos têm a escola identificada por município e dependência.
+- **Só quem fez as quatro provas.** As médias por grupo consideram os 2.588.681 presentes. Quem faltou pode ter perfil diferente.
+- **Sem escola individual.** Desde a edição 2020, o Inep não publica o `CO_ESCOLA` (Leia-me, seção 3).
+- **Amostra em parte das análises.** O boxplot, as correlações e o eta² usam uma amostra fixa de 10% (cerca de 259 mil pessoas).
+- **Associação, não causa.** A regressão compara pessoas iguais nas variáveis do arquivo, mas não controla o que não foi medido, como a qualidade da escola ou o tempo de estudo.
+
 ## Conclusões e insights
 
-**Como ler esta seção.** Cada conclusão descreve algo que acontece junto nos dados, como "quem tem mais renda costuma ter nota maior". Isso não prova que uma coisa causa a outra. Renda, escola, região e escolaridade dos pais costumam andar juntas, e os dados não permitem separar o peso de cada uma. As notas do ENEM vão de 0 a 1.000.
+**Como ler esta seção.** Cada conclusão descreve algo que acontece junto nos dados, como "quem tem mais renda costuma ter nota maior". Isso não prova que uma coisa causa a outra. Renda, escola, região e escolaridade dos pais costumam andar juntas. A regressão do gráfico 16 separa parte desse peso, mas não controla o que não está no arquivo. As notas do ENEM vão de 0 a 1.000.
 
 **1. Mais da metade dos inscritos faltou a pelo menos um dia de prova.**  
 De cada 100 inscritos, 55 não compareceram a pelo menos um dos dois dias. Só 2.588.681 pessoas, menos da metade dos 5,8 milhões de inscritos, fizeram as quatro provas objetivas. Como contexto, o Inep registra que a edição de 2020 foi adiada para janeiro de 2021 por causa da pandemia.  
@@ -228,16 +249,16 @@ A média é 576,5 na rede privada, 569,3 na federal, 512,4 na municipal e 491,7 
 *Gráfico: [Média por dependência da escola e por faixa etária](docs/img/04_media_dependencia_faixa.png). Os dez grupos estão na [tabela de indicadores](docs/indicadores.md), pergunta 1.*
 
 **6. Entre os mais pobres, quem estudou em escola privada tem 79 pontos a mais que quem estudou em pública. Entre os mais ricos, a diferença cai para 37.**  
-Aqui o tipo de escola é o que o próprio participante informou na inscrição. Na faixa sem renda, a diferença entre privada e pública é de 78,7 pontos. Na faixa acima de R$ 20.900, é de 36,6 pontos. Ou seja, o tipo de escola acompanha uma diferença maior justamente onde a renda é menor.  
-*Gráfico: [Média por renda e tipo de escola](docs/img/12_renda_x_tipo_escola.png).*
+Aqui o tipo de escola é o que o próprio participante informou na inscrição. Na faixa sem renda, a diferença entre privada e pública é de 78,7 pontos. Na faixa acima de R$ 20.900, é de 36,6 pontos. Ou seja, o tipo de escola acompanha uma diferença maior justamente onde a renda é menor. Comparando pessoas com a mesma renda, cor/raça, sexo e UF, a vantagem média da escola privada cai de 81,1 para 28,6 pontos.  
+*Gráficos: [Média por renda e tipo de escola](docs/img/12_renda_x_tipo_escola.png) e [Diferenças com e sem controles](docs/img/16_efeitos_controlados.png).*
 
 **7. Quanto mais a mãe estudou, maior a nota, e quem tem internet e computador em casa faz 78 pontos a mais.**  
 Filhos de mães que nunca estudaram têm média de 460,9. Quando a mãe tem pós-graduação, a média sobe para 565,5, mais de 100 pontos acima. Quem tem internet e computador em casa tem média de 541,9, contra 464,2 de quem não tem nenhum dos dois.  
 *Gráfico: [Média por escolaridade da mãe e por internet e computador](docs/img/11_media_mae_internet.png).*
 
 **8. Candidatos brancos e homens têm média maior que os demais grupos.**  
-Participantes brancos têm a maior média entre os grupos de cor/raça: 539,92. Ela fica 49,3 pontos acima da média de pretos (490,58) e 72,8 acima da de indígenas (467,16). Os homens têm média de 528,58, 26 pontos acima da das mulheres (502,61), mesmo as mulheres sendo a maioria de quem fez as quatro provas (60,4%).  
-*Gráfico: [Média por cor/raça e por sexo](docs/img/14_media_cor_raca_sexo.png).*
+Participantes brancos têm a maior média entre os grupos de cor/raça: 539,92. Ela fica 49,3 pontos acima da média de pretos (490,58) e 72,8 acima da de indígenas (467,16). Os homens têm média de 528,58, 26 pontos acima da das mulheres (502,61), mesmo as mulheres sendo a maioria de quem fez as quatro provas (60,4%). Comparando pessoas com a mesma renda, tipo de escola, sexo e UF, a diferença entre brancos e pretos cai de 49,3 para 21,7 pontos, e a entre homens e mulheres cai pouco, de 26,0 para 19,5.  
+*Gráficos: [Média por cor/raça e por sexo](docs/img/14_media_cor_raca_sexo.png) e [Diferenças com e sem controles](docs/img/16_efeitos_controlados.png).*
 
 **9. Só os estados do Sul, do Sudeste e o Distrito Federal ficam acima da média nacional.**  
 A média nacional é de 512,9. Os sete estados do Sul e do Sudeste e o DF ficam acima dela, e todos os demais ficam abaixo. Entre o estado com a maior média (São Paulo, 541,2) e o com a menor (Amapá, 476,8) há 64,4 pontos de diferença.  

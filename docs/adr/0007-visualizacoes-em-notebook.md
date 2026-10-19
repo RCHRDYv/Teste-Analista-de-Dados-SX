@@ -5,7 +5,7 @@
 
 ## Contexto
 
-O teste sugere ferramentas como Power BI, Tableau ou Colab para as visões. Quem avalia precisa ver os gráficos sem instalar software e, de preferência, conseguir reproduzi-los. O visualizador de notebooks do GitHub não renderiza gráficos interativos do Plotly.
+O teste sugere ferramentas como Power BI ou Colab para as visões. Quem avalia precisa ver os gráficos sem instalar software e, de preferência, conseguir reproduzi-los. O visualizador de notebooks do GitHub não renderiza gráficos interativos do Plotly.
 
 ## Decisão
 
